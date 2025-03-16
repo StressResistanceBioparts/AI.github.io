@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gene Sequence Database</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Logo and Header Section -->
+        <header>
+            <div class="logo-container">
+                <img src="img/logo.png" alt="Laboratory Logo" class="logo">
+                <h1>微生物抗逆元件数据库 </h1>
+                <h3>Microbial Tolerance Element Database </h3>
+            </div>
+            <p class="lab-description">Welcome to Microbial Tolerance Element Database. </p>
+        </header>
+
+        <!-- Database Introduction -->
+        <section class="database-info">
+            <h2>About the Database</h2>
+            <p>This database collects and collates information on microbial stress resistance elements, aiming to provide researchers with genetic sequence information on microbial adaptation or resistance to adverse environmental conditions under various stresses. They contain different types of stress resistance elements, such as transcription factors, regulatory elements, response genes, or functional proteins.</p>
+            <p><strong>Features:</strong></p>
+            <ul>
+                <li>Searchable gene information</li>
+                <li>Gene sequence display</li>
+                <li>Pagination for large datasets</li>
+            </ul>
+        </section>
+
+        <!-- Search Bar -->
+        <div class="search-bar">
+            <input type="text" id="searchQuery" placeholder="Search by Gene Name or ID">
+            <button onclick="searchGene()">Search</button>
+        </div>
+
+        <!-- Gene Information Table -->
+        <div id="geneInfo">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Gene ID</th>
+                        <th>Gene Name</th>
+                        <th>Function</th>
+                        <th>Description</th>
+                        <th>References</th>
+                        <th>Download Sequences</th>
+
+                    </tr>
+                </thead>
+                <tbody id="geneTableBody">
+                    <!-- Gene rows will be dynamically inserted here -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pagination -->
+        <div id="pagination">
+            <button onclick="previousPage()">Previous</button>
+            <span id="pageNumber">Page 1</span>
+            <button onclick="nextPage()">Next</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
