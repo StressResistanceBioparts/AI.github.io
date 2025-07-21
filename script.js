@@ -289,7 +289,74 @@ let allGenes = [
 //     displayGenes();
 // }
 // Example global variables to control pagination
+////
+// 2025/7/22日修改
+// // 初始化页面
+// displayGenes();
 
+// function displayGenes() {
+//     let start = (currentPage - 1) * genesPerPage;
+//     let end = start + genesPerPage;
+//     let genesToDisplay = allGenes.slice(start, end);
+
+//     let tableBody = document.getElementById("geneTableBody");
+//     tableBody.innerHTML = ''; // 清空现有数据
+
+//     genesToDisplay.forEach(gene => {
+//         let row = document.createElement("tr");
+//         row.innerHTML = `
+//             <td>${gene.GeneId}</td>
+//             <td>${gene.GeneName}</td>
+//             <td>${gene.Function}</td>
+//             <td>${gene.Description}</td>
+//             <td>${gene.References}</td>
+//             <td><button onclick="downloadFasta('${gene.GeneId}')">下载序列</button></td> <!-- 添加下载按钮 -->
+//         `;
+//         tableBody.appendChild(row);
+//     });
+
+//     document.getElementById("pageNumber").textContent = `Page ${currentPage}`;
+// }
+
+// function downloadFasta(GeneId) {
+//     // 生成对应基因的 FASTA 文件下载链接
+//     let fastaUrl = `data/${GeneId}.fasta`;  // 假设每个基因有一个独特的 FASTA 文件
+//     let link = document.createElement("a");
+//     link.href = fastaUrl;
+//     link.download = `${GeneId}.fasta`; // 下载文件的名称
+//     link.click();
+// }
+
+// function nextPage() {
+//     if (currentPage * genesPerPage < allGenes.length) {
+//         currentPage++;
+//         displayGenes();
+//     }
+// }
+
+// function previousPage() {
+//     if (currentPage > 1) {
+//         currentPage--;
+//         displayGenes();
+//     }
+// }
+
+// function searchGene() {
+//     let query = document.getElementById("searchQuery").value.toLowerCase();
+//     let filteredGenes = allGenes.filter(gene => 
+//         gene.GeneName.toLowerCase().includes(query) || 
+//         gene.GeneId.toString().includes(query)
+//     );
+//     allGenes = filteredGenes;
+//     currentPage = 1; // 重置为第一页
+//     displayGenes();
+// }
+
+// // 初始化页面
+// displayGenes();
+
+
+///新增内容
 // 初始化页面
 displayGenes();
 
@@ -309,7 +376,8 @@ function displayGenes() {
             <td>${gene.Function}</td>
             <td>${gene.Description}</td>
             <td>${gene.References}</td>
-            <td><button onclick="downloadFasta('${gene.GeneId}')">下载序列</button></td> <!-- 添加下载按钮 -->
+            <!-- 保持无参数的下载函数 -->
+            <td><button onclick="downloadFasta()">下载序列</button></td>
         `;
         tableBody.appendChild(row);
     });
@@ -317,15 +385,21 @@ function displayGenes() {
     document.getElementById("pageNumber").textContent = `Page ${currentPage}`;
 }
 
-function downloadFasta(GeneId) {
-    // 生成对应基因的 FASTA 文件下载链接
-    let fastaUrl = `data/${GeneId}.fasta`;  // 假设每个基因有一个独特的 FASTA 文件
+// 全局文件下载函数
+function downloadFasta() {
+    // 所有下载按钮指向同一个全局文件
+    let fastaUrl = `data/all_seq.fasta`;
     let link = document.createElement("a");
     link.href = fastaUrl;
-    link.download = `${GeneId}.fasta`; // 下载文件的名称
+    link.download = "all_sequences.fasta"; // 统一的下载文件名
+    
+    // 安全地创建和移除链接
+    document.body.appendChild(link);
     link.click();
+    document.body.removeChild(link);
 }
 
+// 分页和搜索函数保持不变
 function nextPage() {
     if (currentPage * genesPerPage < allGenes.length) {
         currentPage++;
@@ -351,5 +425,3 @@ function searchGene() {
     displayGenes();
 }
 
-// 初始化页面
-displayGenes();
